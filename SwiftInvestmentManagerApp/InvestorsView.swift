@@ -11,10 +11,10 @@ import CoreData
 
 struct InvestorsView: View {
 
-
     @State private var addInvestorButtonPressed = false
     @State private var showAddInvestorView = false
     @State private var addButtonColor = Color.blue
+    @Environment(\.colorScheme) var colorScheme
     @Environment(\.managedObjectContext) var managedObjectContext
     @FetchRequest(entity: Investor.entity(), sortDescriptors:[NSSortDescriptor(key: "name", ascending: true)]) var investorList: FetchedResults<Investor>
     @FetchRequest(entity: InvestorGroup.entity(), sortDescriptors:[]) var investorGroup: FetchedResults<InvestorGroup>
@@ -28,11 +28,14 @@ struct InvestorsView: View {
                 VStack{
                     List{
                         ForEach(investorList, id: \.self){ investor in
-                            InvestorListItem(name: investor.name!, currentStakePercentage: investor.currentStakePercentage, currentTotal: investor.currentTotal)
+                            InvestorListView(name: investor.name!, currentStakePercentage: investor.currentStakePercentage, currentTotal: investor.currentTotal)
                         }.onDelete(perform: deleteInvestor)
                         }
-                    .navigationBarTitle("Investors")
-                    .navigationBarItems(trailing:
+                        .onAppear{
+                            UITableView.appearance().separatorStyle = .none
+                        }
+                        .navigationBarTitle("Investors")
+                        .navigationBarItems(trailing:
                         HStack {
                             Button(action: {
                                 self.addInvestor()
@@ -40,8 +43,9 @@ struct InvestorsView: View {
                             }) {
                                 Image(systemName: "person.badge.plus.fill")
                                     .font(.largeTitle)
-                            }
-                            .foregroundColor(Color.white)
+                                
+                                }
+                            .foregroundColor(self.colorScheme == .dark ? Color.white : Color.black)
                         })
                             .sheet(isPresented: self.$showAddInvestorView){
                                 AddInvestorView()
@@ -100,7 +104,7 @@ struct InvestorsView: View {
     private func addInvestor(){
          
         let newInvestor = Investor(context: managedObjectContext)
-        newInvestor.name = "Andres Di Gregorio"
+        newInvestor.name = "Adbarrah Mansour"
         newInvestor.currentStakePercentage = 13.0
         newInvestor.currentTotal = 1400.0
         
@@ -121,11 +125,12 @@ struct InvestorsView: View {
     }
 }
 
-struct InvestorListItem : View{
+struct InvestorListView : View{
     
     private var investorName:String?
     private var investorCurrentStakePercentage:Float?
     private var investorCurrentTotal:Double?
+    @Environment(\.colorScheme) var colorScheme
     
     public init(name: String, currentStakePercentage: Float, currentTotal: Double){
         self.investorName = name
@@ -136,21 +141,22 @@ struct InvestorListItem : View{
     var body: some View{
         return ZStack{
             HStack{
-                Text(self.investorName!)
-                Spacer().frame(width: 50)
-                Text(String(format: "%.2f", self.investorCurrentStakePercentage!) + "%")
-                Spacer()
-                Text(String(format: "%.2f", self.investorCurrentTotal!) + "$")
-                Spacer()
+               // Spacer().frame(width: 0)
+                Text(self.investorName!).font(.system(size: 18)).font(.system(.body, design: .rounded)).fontWeight(.bold)
+                Spacer().frame(width: 18)
+                Text(String(format: "%.2f", self.investorCurrentStakePercentage!) + "%").font(.system(size: 18)).font(.system(.body, design: .rounded))
+                Spacer().frame(width: 18)
+                Text(String(format: "%.2f", self.investorCurrentTotal!) + "$").font(.system(size: 18)).font(.system(.body, design: .rounded))
             }
-                .font(.custom("", size: 19.0))
-                .frame(height: 75.0, alignment: .center)
-
-            
         }
+            .foregroundColor(.white)
+            .frame(width: 380, height: 75.0)
+            .background(Color.blue)
+            .contentShape(RoundedRectangle(cornerRadius: 17.0))
+            .clipShape(RoundedRectangle(cornerRadius: 20.0))
+            .shadow(radius: 4.5)
     }
 }
-
 
 #if DEBUG
 struct InvestorView_Previews: PreviewProvider {
