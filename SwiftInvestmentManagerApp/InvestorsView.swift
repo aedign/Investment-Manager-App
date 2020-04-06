@@ -108,7 +108,14 @@ struct InvestorsView: View {
         newInvestor.currentStakePercentage = 13.0
         newInvestor.currentTotal = 1400.0
         
-        save()
+        
+        let investorChange = InvestorChange(context: managedObjectContext)
+               investorChange.date = Date()
+
+        newInvestor.addToChange(investorChange)
+
+        
+      //  save()
         /*
         // use this to refer to the class when creating it
         let investorClassName:String = String(describing: Investor.self)
@@ -142,12 +149,12 @@ struct InvestorListView : View{
         return ZStack{
             HStack{
                // Spacer().frame(width: 0)
-                Text(self.investorName!).font(.system(size: 18)).font(.system(.body, design: .rounded)).fontWeight(.bold)
+                Text(self.investorName!).font(.system(size: 18)).fontWeight(.bold)
                 Spacer().frame(width: 18)
-                Text(String(format: "%.2f", self.investorCurrentStakePercentage!) + "%").font(.system(size: 18)).font(.system(.body, design: .rounded))
+                Text(String(format: "%.2f", self.investorCurrentStakePercentage!) + "%")
                 Spacer().frame(width: 18)
-                Text(String(format: "%.2f", self.investorCurrentTotal!) + "$").font(.system(size: 18)).font(.system(.body, design: .rounded))
-            }
+                Text(String(format: "%.2f", self.investorCurrentTotal!) + "$")
+            }.font(.system(size: 18)).font(.system(.body, design: .rounded))
         }
             .foregroundColor(.white)
             .frame(width: 380, height: 75.0)

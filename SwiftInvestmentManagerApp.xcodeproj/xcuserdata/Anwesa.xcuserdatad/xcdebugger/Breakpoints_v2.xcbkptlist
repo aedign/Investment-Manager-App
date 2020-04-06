@@ -62,9 +62,9 @@
             filePath = "SwiftInvestmentManagerApp/InvestorsView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "140"
-            endingLineNumber = "140"
-            landmarkName = "InvestorListItem"
+            startingLineNumber = "147"
+            endingLineNumber = "147"
+            landmarkName = "InvestorListView"
             landmarkType = "14">
          </BreakpointContent>
       </BreakpointProxy>
