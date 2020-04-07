@@ -25,18 +25,19 @@ struct InvestorListView : View{
     var body: some View{
         ZStack{
             HStack{
-               // Spacer().frame(width: 0)
-                Text(self.investorName!).font(.system(size: 18)).fontWeight(.bold)
-                Spacer().frame(width: 18)
+                Text(self.investorName!).font(.system(size: 18)).fontWeight(.bold).frame(width: 190, alignment: .leading)
+              //  Spacer().frame(width: 1)
                 Text(String(format: "%.2f", self.investorCurrentStakePercentage!) + "%")
-                Spacer().frame(width: 18)
+               // Spacer().frame(width: 22)
                 Text(String(format: "%.2f", self.investorCurrentTotal!) + "$")
-            }.font(.system(size: 18)).font(.system(.body, design: .rounded))
+            }
+                .font(.system(size: 18)).font(.system(.body, design: .rounded))
+            .padding()
         }
             .foregroundColor(.white)
             .frame(width: 380, height: 75.0)
             .background(Color.blue)
-            .contentShape(RoundedRectangle(cornerRadius: 17.0))
+           // .contentShape(RoundedRectangle(cornerRadius: 20.0))
             .clipShape(RoundedRectangle(cornerRadius: 20.0))
             .shadow(radius: 4.5)
     }
@@ -45,7 +46,7 @@ struct InvestorListView : View{
 #if DEBUG
 struct InvestorListView_Previews: PreviewProvider {
     static var previews: some View {
-        InvestorListView(name: "A", currentStakePercentage: 12.0, currentTotal: 12.0)
+        InvestorListView(name: "Andres Di Gregorio", currentStakePercentage: 12.0, currentTotal: 1200.0)
     }
 }
 #endif

@@ -13,7 +13,6 @@ struct InvestorsView: View {
 
     @State private var addInvestorButtonPressed = false
     @State private var showAddInvestorView = false
-    @State private var addButtonColor = Color.blue
     @Environment(\.colorScheme) var colorScheme
     @Environment(\.managedObjectContext) var managedObjectContext
     @FetchRequest(entity: Investor.entity(), sortDescriptors:[NSSortDescriptor(key: "name", ascending: true)]) var investorList: FetchedResults<Investor>
@@ -30,22 +29,21 @@ struct InvestorsView: View {
                         ForEach(investorList, id: \.self){ investor in
                             InvestorListView(name: investor.name!, currentStakePercentage: investor.currentStakePercentage, currentTotal: investor.currentTotal)
                         }.onDelete(perform: deleteInvestor)
-                        }
+                    }
                         .onAppear{
                             UITableView.appearance().separatorStyle = .none
                         }
                         .navigationBarTitle("Investors")
                         .navigationBarItems(trailing:
-                        HStack {
-                            Button(action: {
-                                self.addInvestor()
-                                self.showAddInvestorView.toggle()
-                            }) {
-                                Image(systemName: "person.badge.plus.fill")
-                                    .font(.largeTitle)
-                                
-                                }
-                            .foregroundColor(self.colorScheme == .dark ? Color.white : Color.black)
+                    HStack {
+                        Button(action: {
+                            self.addInvestor()
+                            self.showAddInvestorView.toggle()
+                        }) {
+                            Image(systemName: "person.badge.plus.fill")
+                                .font(.largeTitle)
+                            }
+                                .foregroundColor(self.colorScheme == .dark ? Color.white : Color.black)
                         })
                             .sheet(isPresented: self.$showAddInvestorView){
                                 AddInvestorView()
@@ -60,11 +58,10 @@ struct InvestorsView: View {
                     
                     .padding()
                     .frame(alignment: .center)
-                    .background(addButtonColor)
+                    .background(Color.blue)
                     .foregroundColor(Color.white)
                     .cornerRadius(10)
-                    .overlay(RoundedRectangle(cornerRadius: 10)
-                    .stroke(addButtonColor, lineWidth: 5))
+                    .clipShape(RoundedRectangle(cornerRadius: 15.0))
                     .scaleEffect(self.addInvestorButtonPressed ? 1.2 : 1.0)
                         .onLongPressGesture(minimumDuration: .infinity, maximumDistance: .infinity, pressing: {
                         pressing in
