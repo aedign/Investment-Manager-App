@@ -64,7 +64,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         // Save changes in the application's managed object context when the application transitions to the background.
        // AppDelegate.saveContext()
-        print("lkefmlwe")
     }
 
 

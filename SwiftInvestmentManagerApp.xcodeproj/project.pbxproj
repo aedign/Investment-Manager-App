@@ -26,6 +26,7 @@
 		DA3F1A622437DA11004E55DB /* AppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3F1A612437DA11004E55DB /* AppView.swift */; };
 		DA3F1A6424394778004E55DB /* AddInvestorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3F1A6324394778004E55DB /* AddInvestorView.swift */; };
 		DA9D7C842436F0F90001ECBD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA9D7C832436F0F90001ECBD /* LaunchScreen.storyboard */; };
+		DAF8BADF243B167A001183EF /* InvestorListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF8BADE243B167A001183EF /* InvestorListView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +72,7 @@
 		DA3F1A612437DA11004E55DB /* AppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppView.swift; sourceTree = "<group>"; };
 		DA3F1A6324394778004E55DB /* AddInvestorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddInvestorView.swift; sourceTree = "<group>"; };
 		DA9D7C832436F0F90001ECBD /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		DAF8BADE243B167A001183EF /* InvestorListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvestorListView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,6 +141,7 @@
 				DA35587F24367DFD00F4E853 /* AppDelegate.swift */,
 				DA35588124367DFD00F4E853 /* SceneDelegate.swift */,
 				DA35588624367DFD00F4E853 /* InvestorsView.swift */,
+				DAF8BADE243B167A001183EF /* InvestorListView.swift */,
 				DA3F1A6324394778004E55DB /* AddInvestorView.swift */,
 				DA3F1A612437DA11004E55DB /* AppView.swift */,
 				DA0DF8142436BF4B0096BAC8 /* Classes */,
@@ -240,7 +243,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1130;
-				LastUpgradeCheck = 1130;
+				LastUpgradeCheck = 1140;
 				ORGANIZATIONNAME = "Andres Di Gregorio";
 				TargetAttributes = {
 					DA35587B24367DFD00F4E853 = {
@@ -309,6 +312,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DA35588524367DFD00F4E853 /* SwiftInvestmentManagerApp.xcdatamodeld in Sources */,
+				DAF8BADF243B167A001183EF /* InvestorListView.swift in Sources */,
 				DA35588024367DFD00F4E853 /* AppDelegate.swift in Sources */,
 				DA3F1A6424394778004E55DB /* AddInvestorView.swift in Sources */,
 				DA0DF82B2436C0330096BAC8 /* InvestorGroupChange+CoreDataClass.swift in Sources */,

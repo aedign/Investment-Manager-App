@@ -9,29 +9,37 @@
 import SwiftUI
 
 struct AppView: View {
+    
+    @State private var initialTab = 1
+    
     var body: some View {
-         TabView{
+         TabView(selection: $initialTab){
                 InvestorsView()
                     .tabItem{
                         Image(systemName: "person.fill")
                         Text("Investors")
                 }
+                .tag(0)
                 AddInvestorView()
                     .tabItem{
                         Image(systemName: "dollarsign.circle.fill")
                         Text("Total")
                 }
+                .tag(1)
                 Text("Hypotheticals")
                     .tabItem{
                         Text("Hypoteticals")
                         Image(systemName: "percent")
                 }
-         }.tag(0)
+                .tag(2)
+         }
     }
 }
 
+#if DEBUG
 struct AppView_Previews: PreviewProvider {
     static var previews: some View {
         AppView()
     }
 }
+#endif

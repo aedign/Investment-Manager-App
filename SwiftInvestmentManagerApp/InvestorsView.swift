@@ -55,7 +55,7 @@ struct InvestorsView: View {
                     Button("Add Investor"){
                     }
                     .simultaneousGesture(LongPressGesture(minimumDuration: 2, maximumDistance: 1).onEnded{_ in
-                        self.addInvestorGroup()
+                       // self.addInvestorGroup()
                     })
                     
                     .padding()
@@ -112,7 +112,7 @@ struct InvestorsView: View {
         let investorChange = InvestorChange(context: managedObjectContext)
                investorChange.date = Date()
 
-        newInvestor.addToChange(investorChange)
+      //  newInvestor.addToChange(investorChange)
 
         
       //  save()
@@ -132,41 +132,10 @@ struct InvestorsView: View {
     }
 }
 
-struct InvestorListView : View{
-    
-    private var investorName:String?
-    private var investorCurrentStakePercentage:Float?
-    private var investorCurrentTotal:Double?
-    @Environment(\.colorScheme) var colorScheme
-    
-    public init(name: String, currentStakePercentage: Float, currentTotal: Double){
-        self.investorName = name
-        self.investorCurrentStakePercentage = currentStakePercentage
-        self.investorCurrentTotal = currentTotal
-    }
-    
-    var body: some View{
-        return ZStack{
-            HStack{
-               // Spacer().frame(width: 0)
-                Text(self.investorName!).font(.system(size: 18)).fontWeight(.bold)
-                Spacer().frame(width: 18)
-                Text(String(format: "%.2f", self.investorCurrentStakePercentage!) + "%")
-                Spacer().frame(width: 18)
-                Text(String(format: "%.2f", self.investorCurrentTotal!) + "$")
-            }.font(.system(size: 18)).font(.system(.body, design: .rounded))
-        }
-            .foregroundColor(.white)
-            .frame(width: 380, height: 75.0)
-            .background(Color.blue)
-            .contentShape(RoundedRectangle(cornerRadius: 17.0))
-            .clipShape(RoundedRectangle(cornerRadius: 20.0))
-            .shadow(radius: 4.5)
-    }
-}
+
 
 #if DEBUG
-struct InvestorView_Previews: PreviewProvider {
+struct InvestorsView_Previews: PreviewProvider {
     static var previews: some View {
         InvestorsView()
     }
