@@ -21,43 +21,51 @@ struct InvestorsView: View {
     var body: some View {
         
         ZStack{
-            Color.black
-                .edgesIgnoringSafeArea(.all)
+            Color.black.edgesIgnoringSafeArea(.all)
+            
             NavigationView{
                 VStack{
-                    List{
-                        ForEach(investorList, id: \.self){ investor in
-                            InvestorListView(name: investor.name!, currentStakePercentage: investor.currentStakePercentage, currentTotal: investor.currentTotal)
-                        }.onDelete(perform: deleteInvestor)
-                    }
-                        .onAppear{
-                            UITableView.appearance().separatorStyle = .none
+                    GeometryReader{ geometry in
+                        List{
+                            if(self.investorList.count == 0){
+                                    Text("There are no Investors")
+                                        .frame(maxWidth: .infinity, alignment: .center)
+                                        .foregroundColor(.gray)
+                            }
+                            else{
+                                ForEach(self.investorList, id: \.self){ investor in
+                                    InvestorListView(name: investor.name!, currentStakePercentage: investor.currentStakePercentage, currentTotal: investor.currentTotal)
+                                } .onDelete(perform: self.deleteInvestor)
+                            }
+                           
                         }
-                        .navigationBarTitle("Investors")
-                        .navigationBarItems(trailing:
+                        .environment(\.defaultMinListRowHeight, geometry.size.height / 7)
+                        .onAppear{ UITableView.appearance().separatorStyle = .none }
+                    }
+                    .navigationBarTitle("Investors")
+                    .navigationBarItems(trailing:
                     HStack {
                         Button(action: {
                             self.addInvestor()
                             self.showAddInvestorView.toggle()
-                        }) {
+                        })
+                        {
                             Image(systemName: "person.badge.plus.fill")
                                 .font(.largeTitle)
-                            }
-                                .foregroundColor(self.colorScheme == .dark ? Color.white : Color.black)
-                        })
-                            .sheet(isPresented: self.$showAddInvestorView){
-                                AddInvestorView()
-                            }
-                
-                HStack(alignment: .center){
-                    Button("Add Investor"){
-                    }
-                    .simultaneousGesture(LongPressGesture(minimumDuration: 2, maximumDistance: 1).onEnded{_ in
-                       // self.addInvestorGroup()
+                        }
+                        .foregroundColor(self.colorScheme == .dark ? Color.white : Color.black)
                     })
-                    
+                    .sheet(isPresented: self.$showAddInvestorView){
+                        AddInvestorView().environment(\.managedObjectContext, self.managedObjectContext)
+                    }
+                
+                    HStack(alignment: .center){
+                        Button("Add Investor"){
+                    }
+                  //  .simultaneousGesture(LongPressGesture(minimumDuration: 2, maximumDistance: 1).onEnded{_ in
+                       // self.addInvestorGroup()
+                   // })
                     .padding()
-                    .frame(alignment: .center)
                     .background(Color.blue)
                     .foregroundColor(Color.white)
                     .cornerRadius(10)
@@ -70,7 +78,7 @@ struct InvestorsView: View {
                             }
                         }, perform :{})
                     .padding()
-                }
+                    }
                 }
             }
         }
@@ -101,7 +109,7 @@ struct InvestorsView: View {
     private func addInvestor(){
          
         let newInvestor = Investor(context: managedObjectContext)
-        newInvestor.name = "Adbarrah Mansour"
+        newInvestor.name = "Andres Di Gregorio"
         newInvestor.currentStakePercentage = 13.0
         newInvestor.currentTotal = 1400.0
         
@@ -112,7 +120,7 @@ struct InvestorsView: View {
       //  newInvestor.addToChange(investorChange)
 
         
-      //  save()
+        save()
         /*
         // use this to refer to the class when creating it
         let investorClassName:String = String(describing: Investor.self)

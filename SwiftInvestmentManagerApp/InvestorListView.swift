@@ -23,24 +23,26 @@ struct InvestorListView : View{
     }
     
     var body: some View{
-        ZStack{
-            HStack{
-                Text(self.investorName!).font(.system(size: 18)).fontWeight(.bold).frame(width: 190, alignment: .leading)
-              //  Spacer().frame(width: 1)
-                Text(String(format: "%.2f", self.investorCurrentStakePercentage!) + "%")
-               // Spacer().frame(width: 22)
-                Text(String(format: "%.2f", self.investorCurrentTotal!) + "$")
-            }
-                .font(.system(size: 18)).font(.system(.body, design: .rounded))
-            .padding()
-        }
-            .foregroundColor(.white)
-            .frame(width: 380, height: 75.0)
-            .background(Color.blue)
-           // .contentShape(RoundedRectangle(cornerRadius: 20.0))
-            .clipShape(RoundedRectangle(cornerRadius: 20.0))
-            .shadow(radius: 4.5)
+        GeometryReader{ geometry in
+                HStack{
+                    Text(self.investorName!).fontWeight(.bold).frame(width: geometry.size.width / 2.19, height: geometry.size.height - 10, alignment: .leading)
+                    Spacer()
+                    Text(String(format: "%.2f", self.investorCurrentStakePercentage!) + "%")
+                    Text(String(format: "%.2f", self.investorCurrentTotal!) + "$")            
+                }
+                .padding()
+                .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
+                .frame(height: geometry.size.height )
+                .font(.system(size: geometry.size.width / 20))
+                .font(.system(.body, design: .rounded))
+                .foregroundColor(.white)
+                .background(Color.blue)
+               // .contentShape(RoundedRectangle(cornerRadius: 20.0))
+                .clipShape(RoundedRectangle(cornerRadius: 20.0))
+                .shadow(radius: 4.5)
+        }//.frame(width: UIScreen.main.bounds.width - 20, height: UIScreen.main.bounds.height / 12)
     }
+
 }
 
 #if DEBUG

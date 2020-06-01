@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:SwiftInvestmentManagerApp.xcodeproj">
+      location = "self:/Users/Anwesa/Git/SwiftInvestmentManagerApp/SwiftInvestmentManagerApp.xcodeproj">
    </FileRef>
 </Workspace>
