@@ -20,7 +20,7 @@ struct AppView: View {
                         Text("Investors")
                 }
                 .tag(0)
-                Text("Total")
+            Text("Total")
                     .tabItem{
                         Image(systemName: "dollarsign.circle.fill")
                         Text("Total")

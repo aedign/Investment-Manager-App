@@ -14,7 +14,6 @@ struct InvestorListView : View{
     private var investorName:String?
     private var investorCurrentStakePercentage:Float?
     private var investorCurrentTotal:Double?
-    @Environment(\.colorScheme) var colorScheme
     
     public init(name: String, currentStakePercentage: Float, currentTotal: Double){
         self.investorName = name
@@ -25,10 +24,13 @@ struct InvestorListView : View{
     var body: some View{
         GeometryReader{ geometry in
                 HStack{
-                    Text(self.investorName!).fontWeight(.bold).frame(width: geometry.size.width / 2.19, height: geometry.size.height - 10, alignment: .leading)
-                    Spacer()
+                    Text(self.investorName!).fontWeight(.bold)
+                        .frame(width: geometry.size.width / 2.4, height: geometry.size.height - 10, alignment: .leading)
+                        
                     Text(String(format: "%.2f", self.investorCurrentStakePercentage!) + "%")
-                    Text(String(format: "%.2f", self.investorCurrentTotal!) + "$")            
+                        .frame(width: geometry.size.width / 5, height: geometry.size.height - 10, alignment: .leading)
+                    Text(String(format: "%.2f", self.investorCurrentTotal!) + "$")
+                        .frame(width: geometry.size.width / 3, height: geometry.size.height - 10, alignment: .leading)
                 }
                 .padding()
                 .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
@@ -48,7 +50,7 @@ struct InvestorListView : View{
 #if DEBUG
 struct InvestorListView_Previews: PreviewProvider {
     static var previews: some View {
-        InvestorListView(name: "Andres Di Gregorio", currentStakePercentage: 12.0, currentTotal: 1200.0)
+        InvestorListView(name: "Andres Di Gregorio", currentStakePercentage: 100.00, currentTotal: 12000.0)
     }
 }
 #endif

@@ -10,7 +10,7 @@ import SwiftUI
 import CoreData
 
 struct InvestorsView: View {
-
+    
     @State private var addInvestorButtonPressed = false
     @State private var showAddInvestorView = false
     @Environment(\.colorScheme) var colorScheme
@@ -19,12 +19,8 @@ struct InvestorsView: View {
     @FetchRequest(entity: InvestorGroup.entity(), sortDescriptors:[]) var investorGroup: FetchedResults<InvestorGroup>
     
     var body: some View {
-        
         ZStack{
-            Color.black.edgesIgnoringSafeArea(.all)
-            
             NavigationView{
-                VStack{
                     GeometryReader{ geometry in
                         List{
                             if(self.investorList.count == 0){
@@ -33,9 +29,11 @@ struct InvestorsView: View {
                                         .foregroundColor(.gray)
                             }
                             else{
-                                ForEach(self.investorList, id: \.self){ investor in
-                                    InvestorListView(name: investor.name!, currentStakePercentage: investor.currentStakePercentage, currentTotal: investor.currentTotal)
-                                } .onDelete(perform: self.deleteInvestor)
+                                ForEach(self.investorGroup, id: \.self){group in
+                                    ForEach(self.investorList, id: \.self){ investor in
+                                        InvestorListView(name: investor.name!, currentStakePercentage: investor.currentStakePercentage, currentTotal: investor.currentTotal)
+                                    } .onDelete(perform: self.deleteInvestor)
+                                }
                             }
                            
                         }
@@ -44,89 +42,36 @@ struct InvestorsView: View {
                     }
                     .navigationBarTitle("Investors")
                     .navigationBarItems(trailing:
-                    HStack {
-                        Button(action: {
-                            self.addInvestor()
-                            self.showAddInvestorView.toggle()
-                        })
-                        {
+                        NavigationLink(destination: AddInvestorView().environment(\.managedObjectContext, self.managedObjectContext)){
                             Image(systemName: "person.badge.plus.fill")
                                 .font(.largeTitle)
                         }
                         .foregroundColor(self.colorScheme == .dark ? Color.white : Color.black)
-                    })
-                    .sheet(isPresented: self.$showAddInvestorView){
-                        AddInvestorView().environment(\.managedObjectContext, self.managedObjectContext)
-                    }
-                
-                    HStack(alignment: .center){
-                        Button("Add Investor"){
-                    }
-                  //  .simultaneousGesture(LongPressGesture(minimumDuration: 2, maximumDistance: 1).onEnded{_ in
-                       // self.addInvestorGroup()
-                   // })
-                    .padding()
-                    .background(Color.blue)
-                    .foregroundColor(Color.white)
-                    .cornerRadius(10)
-                    .clipShape(RoundedRectangle(cornerRadius: 15.0))
-                    .scaleEffect(self.addInvestorButtonPressed ? 1.2 : 1.0)
-                        .onLongPressGesture(minimumDuration: .infinity, maximumDistance: .infinity, pressing: {
-                        pressing in
-                        withAnimation(.easeInOut(duration: 0.6)){
-                            self.addInvestorButtonPressed = pressing
-                            }
-                        }, perform :{})
-                    .padding()
-                    }
-                }
+                    )
             }
         }
     }
     
-    private func addInvestorGroup(){
-        let newInvestorGroup = InvestorGroup(context: managedObjectContext)
-        newInvestorGroup.initialInvestment = 3000.0
-        newInvestorGroup.lastChangeDate = Date()
-        save()
-    }
-    
-    
     private func deleteInvestor(indexSet: IndexSet){
+        
         let source = indexSet.first!
         let investorToDelete = investorList[source]
+        let group = investorGroup.first!
+        group.groupInvestment -= investorToDelete.initialInvestment
         managedObjectContext.delete(investorToDelete)
+
+        if group.hasMany?.count == 0 {
+            managedObjectContext.delete(group)
+        }
+        else{
+            for investor in investorList{
+                let individual:Double = investor.initialInvestment
+                investor.currentStakePercentage = Float((individual / (group.groupInvestment)) * 100)
+            }
+        }
         save()
-     }
-    
-    private func deleteInvestorGroup(indexSet: IndexSet){
-       let source = indexSet.first!
-       let investorGroupToDelete = investorGroup[source]
-       managedObjectContext.delete(investorGroupToDelete)
-       save()
     }
-     
-    private func addInvestor(){
-         
-        let newInvestor = Investor(context: managedObjectContext)
-        newInvestor.name = "Andres Di Gregorio"
-        newInvestor.currentStakePercentage = 13.0
-        newInvestor.currentTotal = 1400.0
-        
-        
-        let investorChange = InvestorChange(context: managedObjectContext)
-               investorChange.date = Date()
-
-      //  newInvestor.addToChange(investorChange)
-
-        
-        save()
-        /*
-        // use this to refer to the class when creating it
-        let investorClassName:String = String(describing: Investor.self)
-        */
-     }
-    
+          
     private func save(){
         do{
             try managedObjectContext.save()
@@ -136,8 +81,6 @@ struct InvestorsView: View {
         }
     }
 }
-
-
 
 #if DEBUG
 struct InvestorsView_Previews: PreviewProvider {

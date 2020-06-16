@@ -2,7 +2,7 @@
 //  Investor+CoreDataProperties.swift
 //  SwiftInvestmentManagerApp
 //
-//  Created by Andres Di Gregorio on 4/2/20.
+//  Created by Andres Di Gregorio on 6/15/20.
 //  Copyright © 2020 Andres Di Gregorio. All rights reserved.
 //
 //
@@ -22,25 +22,25 @@ extension Investor {
     @NSManaged public var earningsAmount: Double
     @NSManaged public var earningsPercentage: Float
     @NSManaged public var initialInvestment: Double
-    @NSManaged public var name: String?
-    @NSManaged public var change: NSSet?
-    @NSManaged public var investorGroup: InvestorGroup?
+    @NSManaged public var name: String
+    @NSManaged public var hasOne: InvestorGroup
+    @NSManaged public var makes: NSSet?
 
 }
 
-// MARK: Generated accessors for change
+// MARK: Generated accessors for makes
 extension Investor {
 
-    @objc(addChangeObject:)
-    @NSManaged public func addToChange(_ value: InvestorChange)
+    @objc(addMakesObject:)
+    @NSManaged public func addToMakes(_ value: InvestorChange)
 
-    @objc(removeChangeObject:)
-    @NSManaged public func removeFromChange(_ value: InvestorChange)
+    @objc(removeMakesObject:)
+    @NSManaged public func removeFromMakes(_ value: InvestorChange)
 
-    @objc(addChange:)
-    @NSManaged public func addToChange(_ values: NSSet)
+    @objc(addMakes:)
+    @NSManaged public func addToMakes(_ values: NSSet)
 
-    @objc(removeChange:)
-    @NSManaged public func removeFromChange(_ values: NSSet)
+    @objc(removeMakes:)
+    @NSManaged public func removeFromMakes(_ values: NSSet)
 
 }

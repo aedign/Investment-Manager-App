@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="15702" systemVersion="19D76" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="16119" systemVersion="19E287" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Investor" representedClassName="Investor" syncable="YES">
         <attribute name="currentStakePercentage" optional="YES" attributeType="Float" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="currentTotal" optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="YES"/>
@@ -7,7 +7,7 @@
         <attribute name="earningsPercentage" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="initialInvestment" optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="name" optional="YES" attributeType="String"/>
-        <relationship name="hasOne" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="InvestorGroup" inverseName="change" inverseEntity="InvestorGroup"/>
+        <relationship name="hasOne" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="InvestorGroup" inverseName="hasMany" inverseEntity="InvestorGroup"/>
         <relationship name="makes" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="InvestorChange" inverseName="madeBy" inverseEntity="InvestorChange"/>
     </entity>
     <entity name="InvestorChange" representedClassName="InvestorChange" syncable="YES">
@@ -24,10 +24,11 @@
         <attribute name="currentEarningsAmount" optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="currentEarningsPercentage" optional="YES" attributeType="Float" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="currentTotal" optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="initialInvestment" optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="groupInvestment" optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="lastChangeDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
-        <relationship name="change" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Investor" inverseName="hasOne" inverseEntity="Investor"/>
-        <relationship name="investor" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="InvestorGroupChange" inverseName="madeBy" inverseEntity="InvestorGroupChange"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <relationship name="hasMany" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Investor" inverseName="hasOne" inverseEntity="Investor"/>
+        <relationship name="makes" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="InvestorGroupChange" inverseName="madeBy" inverseEntity="InvestorGroupChange"/>
     </entity>
     <entity name="InvestorGroupChange" representedClassName="InvestorGroupChange" syncable="YES">
         <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
@@ -35,12 +36,12 @@
         <attribute name="newTotal" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="previousTotal" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="reason" optional="YES" attributeType="String"/>
-        <relationship name="madeBy" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="InvestorGroup" inverseName="investor" inverseEntity="InvestorGroup"/>
+        <relationship name="madeBy" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="InvestorGroup" inverseName="makes" inverseEntity="InvestorGroup"/>
     </entity>
     <elements>
-        <element name="Investor" positionX="-154.859375" positionY="-39.28515625" width="128" height="163"/>
+        <element name="Investor" positionX="-200.15234375" positionY="-50.08984375" width="128" height="163"/>
         <element name="InvestorChange" positionX="47.4765625" positionY="-188.56640625" width="128" height="163"/>
-        <element name="InvestorGroup" positionX="-152" positionY="-373.6328125" width="128" height="148"/>
+        <element name="InvestorGroup" positionX="-152" positionY="-373.6328125" width="128" height="163"/>
         <element name="InvestorGroupChange" positionX="80.93359375" positionY="-387.8359375" width="128" height="133"/>
     </elements>
 </model>
