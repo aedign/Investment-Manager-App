@@ -2,7 +2,7 @@
 //  InvestorGroup+CoreDataProperties.swift
 //  SwiftInvestmentManagerApp
 //
-//  Created by Andres Di Gregorio on 6/15/20.
+//  Created by Andres Di Gregorio on 7/22/20.
 //  Copyright © 2020 Andres Di Gregorio. All rights reserved.
 //
 //
@@ -21,9 +21,9 @@ extension InvestorGroup {
     @NSManaged public var currentEarningsPercentage: Float
     @NSManaged public var currentTotal: Double
     @NSManaged public var groupInvestment: Double
-    @NSManaged public var lastChangeDate: Date
-    @NSManaged public var name: String
-    @NSManaged public var hasMany: NSSet
+    @NSManaged public var lastChangeDate: Date?
+    @NSManaged public var name: String?
+    @NSManaged public var hasMany: NSSet?
     @NSManaged public var makes: NSSet?
 
 }

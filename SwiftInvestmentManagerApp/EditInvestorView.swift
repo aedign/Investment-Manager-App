@@ -10,13 +10,7 @@ import SwiftUI
 
 struct ConfirmationView: View {
     
-    private let investorName:String
-    private let investorInitialInvestment:String
-    
-    init(investor:Investor){
-        self.investorName = investor.name! + " was added"
-        self.investorInitialInvestment = String(investor.initialInvestment)
-    }
+    private let investorName:String = "helllo"
     
     var body: some View {
         GeometryReader{ geometry in
@@ -39,6 +33,6 @@ struct ConfirmationView: View {
 
 struct ConfirmationView_Previews: PreviewProvider {
     static var previews: some View {
-        ConfirmationView(investor:Investor())
+        ConfirmationView()
     }
 }

@@ -2,7 +2,7 @@
 //  InvestorGroupChange+CoreDataProperties.swift
 //  SwiftInvestmentManagerApp
 //
-//  Created by Andres Di Gregorio on 6/15/20.
+//  Created by Andres Di Gregorio on 7/22/20.
 //  Copyright © 2020 Andres Di Gregorio. All rights reserved.
 //
 //
@@ -17,11 +17,11 @@ extension InvestorGroupChange {
         return NSFetchRequest<InvestorGroupChange>(entityName: "InvestorGroupChange")
     }
 
-    @NSManaged public var date: Date
+    @NSManaged public var date: Date?
     @NSManaged public var moneyAdded: Double
     @NSManaged public var newTotal: Double
     @NSManaged public var previousTotal: Double
-    @NSManaged public var reason: String
-    @NSManaged public var madeBy: InvestorGroup
+    @NSManaged public var reason: String?
+    @NSManaged public var madeBy: InvestorGroup?
 
 }

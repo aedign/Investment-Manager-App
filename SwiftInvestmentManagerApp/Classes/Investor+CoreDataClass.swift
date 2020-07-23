@@ -2,7 +2,7 @@
 //  Investor+CoreDataClass.swift
 //  SwiftInvestmentManagerApp
 //
-//  Created by Andres Di Gregorio on 6/15/20.
+//  Created by Andres Di Gregorio on 7/22/20.
 //  Copyright © 2020 Andres Di Gregorio. All rights reserved.
 //
 //

@@ -2,7 +2,7 @@
 //  Investor+CoreDataProperties.swift
 //  SwiftInvestmentManagerApp
 //
-//  Created by Andres Di Gregorio on 6/15/20.
+//  Created by Andres Di Gregorio on 7/22/20.
 //  Copyright © 2020 Andres Di Gregorio. All rights reserved.
 //
 //
@@ -22,8 +22,8 @@ extension Investor {
     @NSManaged public var earningsAmount: Double
     @NSManaged public var earningsPercentage: Float
     @NSManaged public var initialInvestment: Double
-    @NSManaged public var name: String
-    @NSManaged public var hasOne: InvestorGroup
+    @NSManaged public var name: String?
+    @NSManaged public var hasOne: InvestorGroup?
     @NSManaged public var makes: NSSet?
 
 }
