@@ -11,6 +11,7 @@ import CoreData
 
 struct InvestorsView: View {
     
+    @State var isPressed = false
     @State private var addInvestorButtonPressed = false
     @State private var showAddInvestorView = false
     @Environment(\.colorScheme) var colorScheme
@@ -29,9 +30,11 @@ struct InvestorsView: View {
                                         .foregroundColor(.gray)
                             }
                             else{
-                                ForEach(self.investorGroup, id: \.self){group in
+                                ForEach(self.investorGroup, id: \.self) {group in
                                     ForEach(self.investorList, id: \.self){ investor in
-                                        InvestorListView(name: investor.name!, currentStakePercentage: investor.currentStakePercentage, currentTotal: investor.currentTotal)
+                                        InvestorListView(investor: investor)
+                                            .onTapGesture {self.isPressed.toggle()}
+                                            .sheet(isPresented: self.$isPressed){EditInvestorView(inv: investor).environment(\.managedObjectContext, self.managedObjectContext)}
                                     } .onDelete(perform: self.deleteInvestor)
                                 }
                             }
@@ -60,13 +63,11 @@ struct InvestorsView: View {
         group.groupInvestment -= investorToDelete.initialInvestment
         managedObjectContext.delete(investorToDelete)
 
-        if group.hasMany?.count == 0 {
-            managedObjectContext.delete(group)
-        }
+        if group.hasMany?.count == 1 {managedObjectContext.delete(group)}
         else{
+            print("AAAAAAAAAAAAAAAAAAAA")
             for investor in investorList{
-                let individual:Double = investor.initialInvestment
-                investor.currentStakePercentage = Float((individual / (group.groupInvestment)) * 100)
+                investor.currentStakePercentage = Float((investor.initialInvestment / (group.groupInvestment)) * 100)
             }
         }
         save()
@@ -77,7 +78,7 @@ struct InvestorsView: View {
             try managedObjectContext.save()
         }
         catch{
-            print("Error saving")
+            print("Error while saving")
         }
     }
 }

@@ -24,7 +24,7 @@ extension InvestorGroup {
     @NSManaged public var lastChangeDate: Date?
     @NSManaged public var name: String?
     @NSManaged public var hasMany: NSSet?
-    @NSManaged public var makes: NSSet?
+    @NSManaged public var makes: NSSet
 
 }
 

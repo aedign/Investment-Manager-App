@@ -11,6 +11,7 @@ import SwiftUI
 struct AppView: View {
     
     @State private var initialTab = 1
+    @Environment(\.managedObjectContext) var managedObjectContext
     
     var body: some View {
          TabView(selection: $initialTab){
@@ -20,18 +21,12 @@ struct AppView: View {
                         Text("Investors")
                 }
                 .tag(0)
-            Text("Total")
+            TotalView().environment(\.managedObjectContext, self.managedObjectContext)
                     .tabItem{
                         Image(systemName: "dollarsign.circle.fill")
                         Text("Total")
                 }
                 .tag(1)
-                Text("Hypotheticals")
-                    .tabItem{
-                        Text("Hypoteticals")
-                        Image(systemName: "percent")
-                }
-                .tag(2)
          }
     }
 }

@@ -12,21 +12,19 @@ import CoreData
 struct AddInvestorView: View {
     
     @State private var newInvestor:Investor?
-    @State private var a:Bool = false
     @State private var addInvestorButtonPressed = false
-    @State private var name:String = ""
-    @State private var initialInvestment:String = ""
+    @State private var investorName:String = ""
+    @State private var investorInitialInvestment:String = ""
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
     
     private var calcStake : Float {
-        if initialInvestment.isEmpty || initialInvestment == "0" {return 0.0}
-        else if investorGroup.first?.groupInvestment == nil {return 100}
+        if investorInitialInvestment.isEmpty || investorInitialInvestment == "0" {return 0.0}
+        else if investorGroup.first?.groupInvestment == 0 {return 100}
         else{
-            let iniInv: Float = Float(initialInvestment)!
-            let groupTotal: Float = Float(investorGroup.first!.groupInvestment)
+            let iniInv: Float = Float(investorInitialInvestment)!
+            let groupTotal: Float = Float(investorGroup.first?.groupInvestment ?? 0)
             return (iniInv / (iniInv + groupTotal)) * 100
     }}
-    
     @Environment(\.colorScheme) var colorScheme
     @Environment(\.managedObjectContext) var managedObjectContext
     
@@ -39,21 +37,20 @@ struct AddInvestorView: View {
                 Text("Name:")
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .font(.system(size: 20, weight: .medium, design: .default))
-                TextField("Enter Name", text: self.$name)
+                TextField("Enter Name", text: self.$investorName)
                     .font(.system(size: 20, weight: .medium, design: .default))
                     .padding(EdgeInsets(top: 20, leading: 0, bottom: 20, trailing: 0))
                     
                 Text("Initial Investment:")
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .font(.system(size: 20, weight: .medium, design: .default))
-                TextField("Enter $", text: self.$initialInvestment)
+                TextField("Enter $", text: self.$investorInitialInvestment)
                     .font(.system(size: 20, weight: .medium, design: .default))
                     .padding(EdgeInsets(top: 20, leading: 0, bottom: 20, trailing: 0))
                     .keyboardType(UIKeyboardType.numberPad)
                     
                 VStack(alignment: .leading){
                     Text("Stake")
-                    .frame(maxWidth: .infinity, alignment: .leading)
                     .font(.system(size: 30, weight: .medium, design: .default))
                         HStack{
                             Text(String(format: "%.2f", self.calcStake))
@@ -63,7 +60,7 @@ struct AddInvestorView: View {
                             .fontWeight(.bold)
                             .font(.largeTitle)
                         }
-                }
+                }.frame(maxWidth: .infinity, alignment: .leading)
                 Spacer()
                 VStack{
                     Text("Press and hold")
@@ -75,8 +72,8 @@ struct AddInvestorView: View {
                         .contentShape(Rectangle()) // makes the enitre button perform the action and not just the etxt
                         .padding()
                         .simultaneousGesture(LongPressGesture(minimumDuration: 1, maximumDistance: 1).onEnded{_ in
-                            if(self.name.count > 1 && Double(self.initialInvestment)! > 0){
-                                self.newInvestor = self.addInvestor()
+                            if(self.investorName.count > 1 && !self.investorInitialInvestment.isEmpty && Double(self.investorInitialInvestment)! > 0){
+                                self.addInvestor()
                                 let impactHeavy = UIImpactFeedbackGenerator(style: .heavy)
                                 impactHeavy.impactOccurred()
                                 self.printAll()
@@ -95,7 +92,7 @@ struct AddInvestorView: View {
                         }, perform :{})
                         .padding()
                 }
-            }
+            }.frame(maxWidth: .infinity, alignment: .leading)
             .padding()
             .navigationBarTitle("Add Investor")
         }.background(self.colorScheme == .dark ? Color.black : Color.white)
@@ -114,48 +111,57 @@ struct AddInvestorView: View {
             print("\(String(describing: inv.name))")
             print("\(String(describing: inv.hasOne))")
             print("\(inv.currentStakePercentage)")
+            print("EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEVEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE")
+            print(inv.makes.count)
+
+            
 
         }
     }
         
-    private func addInvestor() -> Investor {
+    private func addInvestor(){
 
-        if(self.investorGroup.count == 0){
-            self.addInvestorGroup()
+        if self.investorGroup.isEmpty {self.addInvestorGroup()}
+        
+        if !self.investorList.contains(where:{investor in return investor.name.elementsEqual(self.investorName)}) {
+            let newInvestor = Investor(context: managedObjectContext)
+            newInvestor.name = self.investorName
+            newInvestor.initialInvestment = Double(self.investorInitialInvestment)!
+            newInvestor.currentTotal = newInvestor.initialInvestment
+            newInvestor.currentStakePercentage = self.calcStake
+            newInvestor.earningsAmount = 0
+            newInvestor.earningsPercentage = 0
+        
+            addInvestorChange(investor: newInvestor)
+            self.investorGroup.first!.addToHasMany(newInvestor)
+            addGroupChange(newInvestor: newInvestor)
+         
+            updatePercentages()
+            save()
+            printAll()
         }
-        
-        let newInvestor = Investor(context: managedObjectContext)
-        
-        newInvestor.name = self.name
-        newInvestor.initialInvestment = Double(self.initialInvestment)!
-        newInvestor.currentTotal = newInvestor.initialInvestment
-        newInvestor.currentStakePercentage = self.calcStake
-        newInvestor.earningsAmount = 0
-        newInvestor.earningsPercentage = 0
-    
-        self.investorGroup.first?.addToHasMany(newInvestor)
-        
-        addGroupChange(investor: newInvestor)
-     
-        updatePercentages()
-        save()
-        self.a = true   
-        return newInvestor
      }
     
-    private func addGroupChange(investor:Investor){
+    private func addInvestorGroup(){
+        
+        let newInvestorGroup = InvestorGroup(context: managedObjectContext)
+        newInvestorGroup.lastChangeDate = Date()
+        newInvestorGroup.name = "Roomies"
+        save()
+    }
+    
+    private func addGroupChange(newInvestor:Investor){
         
         let groupChange = InvestorGroupChange(context: managedObjectContext)
-               
         groupChange.date = Date()
         groupChange.madeBy = self.investorGroup.first!
-        groupChange.moneyAdded = investor.initialInvestment
+        groupChange.moneyAdded = newInvestor.initialInvestment
         groupChange.previousTotal = self.investorGroup.first!.groupInvestment
         groupChange.newTotal = self.investorGroup.first!.groupInvestment + groupChange.moneyAdded
-        self.investorGroup.first?.groupInvestment = groupChange.newTotal
-        groupChange.reason = "\(String(describing: investor.name)) was added"
-               
-        self.investorGroup.first?.addToMakes(groupChange)
+        self.investorGroup.first!.groupInvestment = groupChange.newTotal
+        groupChange.reason = "\(String(describing: newInvestor.name)) was added"
+    
+        self.investorGroup.first!.addToMakes(groupChange)
     }
     
     private func addInvestorChange(investor: Investor){
@@ -170,19 +176,9 @@ struct AddInvestorView: View {
         investorChange.newStakePercentage = investor.currentStakePercentage
         investorChange.newTotal = investor.currentTotal
         
-    
+        investor.addToMakes(investorChange)
     }
     
-    private func addInvestorGroup(){
-        
-        let newInvestorGroup = InvestorGroup(context: managedObjectContext)
-        
-        newInvestorGroup.lastChangeDate = Date()
-        newInvestorGroup.name = "Roomies"
-        
-        save()
-       }
-       
     private func deleteInvestor(indexSet: IndexSet){
         let source = indexSet.first!
         let investorToDelete = investorList[source]
@@ -199,7 +195,7 @@ struct AddInvestorView: View {
     
     private func updatePercentages() -> Void{
         
-        let group:Double = investorGroup.first!.groupInvestment
+        let group:Double = investorGroup[0].groupInvestment
         
         for investor in investorList{
             let individual:Double = investor.initialInvestment

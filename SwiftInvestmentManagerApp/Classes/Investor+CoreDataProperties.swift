@@ -22,9 +22,9 @@ extension Investor {
     @NSManaged public var earningsAmount: Double
     @NSManaged public var earningsPercentage: Float
     @NSManaged public var initialInvestment: Double
-    @NSManaged public var name: String?
+    @NSManaged public var name: String
     @NSManaged public var hasOne: InvestorGroup?
-    @NSManaged public var makes: NSSet?
+    @NSManaged public var makes: NSSet
 
 }
 

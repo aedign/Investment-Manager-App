@@ -17,7 +17,7 @@ extension InvestorChange {
         return NSFetchRequest<InvestorChange>(entityName: "InvestorChange")
     }
 
-    @NSManaged public var date: Date?
+    @NSManaged public var date: Date
     @NSManaged public var moneyAdded: Double
     @NSManaged public var newStakePercentage: Float
     @NSManaged public var newTotal: Double

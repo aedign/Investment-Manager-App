@@ -8,31 +8,55 @@
 
 import SwiftUI
 
-struct ConfirmationView: View {
+struct EditInvestorView: View {
     
-    private let investorName:String = "helllo"
+    @ObservedObject var inv:Investor
+    @Environment(\.colorScheme) var colorScheme
+    @Environment(\.managedObjectContext) var managedObjectContext
+    @State private var next:Bool = false
     
     var body: some View {
-        GeometryReader{ geometry in
-            VStack(alignment: .leading, spacing: 10){
-                Text(self.investorName)
-                    .font(.title)
-                    .fontWeight(.bold)
-                    .frame(alignment: .leading)
-                Text("Name")
-                Text("Initial Investment")
-                Text("Stake")
-                Text("Investor Group")
-                Text("")
+        NavigationView{
+        ZStack{
+            VStack(alignment: .leading, spacing: 20){
+                Group{
+                    Text(self.inv.name).font(.largeTitle).bold()
+                    Spacer().frame(height: 0)
+                    Text("Initial Investment").font(.title).fontWeight(.bold)
+                    Text(String(self.inv.initialInvestment) + "$").font(.title)
+                    Text("Current Total").font(.title).fontWeight(.bold)
+                    Text(String(self.inv.currentTotal) + "$").font(.title)
+                    Text("Current Earnings").font(.title).fontWeight(.bold)
+                    Text(String(self.inv.earningsAmount) + "$").font(.title)
+                }
+                Group{
+                    Text("Current Earnings %").font(.title).fontWeight(.bold)
+                    Text(String(self.inv.earningsPercentage) + "%").font(.title)
+                    Text("Stake %").font(.title).fontWeight(.bold)
+                    Text(String(self.inv.currentStakePercentage) + "%").font(.title)
+                }
                 Spacer()
-            }  .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
-                          .frame(height: geometry.size.height )
-        }.padding()
+                
+                NavigationLink("Button", destination: InvestorHistory(investor: inv).environment(\.managedObjectContext, self.managedObjectContext))
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding()
+        }
+    }
     }
 }
 
-struct ConfirmationView_Previews: PreviewProvider {
+
+struct EditInvestorView_Previews: PreviewProvider {
     static var previews: some View {
-        ConfirmationView()
+        let managedObjectContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        let inv = Investor(context: managedObjectContext)
+        inv.name = "Andres Di Gregorio"
+        inv.initialInvestment = 1000
+        inv.currentTotal = 1200
+        inv.earningsAmount = inv.currentTotal - inv.initialInvestment
+        inv.earningsPercentage = Float(inv.earningsAmount / inv.initialInvestment) * 100
+        inv.currentStakePercentage = 80.0
+        return EditInvestorView(inv: inv)
     }
 }

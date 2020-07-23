@@ -7,7 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		DA261B3B24871F9000C6AA67 /* ConfirmationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA261B3A24871F9000C6AA67 /* ConfirmationView.swift */; };
+		DA07EEB924C912B80074BDBD /* TotalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA07EEB824C912B80074BDBD /* TotalView.swift */; };
+		DA07EEBB24C91C180074BDBD /* InvestorHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA07EEBA24C91C180074BDBD /* InvestorHistory.swift */; };
+		DA07EEBD24C91C750074BDBD /* InvestorChangeList.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA07EEBC24C91C750074BDBD /* InvestorChangeList.swift */; };
+		DA07EEDA24C92CC20074BDBD /* InvestorChange+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA07EED224C92CC20074BDBD /* InvestorChange+CoreDataClass.swift */; };
+		DA07EEDB24C92CC20074BDBD /* InvestorChange+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA07EED324C92CC20074BDBD /* InvestorChange+CoreDataProperties.swift */; };
+		DA07EEDC24C92CC20074BDBD /* InvestorGroup+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA07EED424C92CC20074BDBD /* InvestorGroup+CoreDataClass.swift */; };
+		DA07EEDD24C92CC20074BDBD /* InvestorGroup+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA07EED524C92CC20074BDBD /* InvestorGroup+CoreDataProperties.swift */; };
+		DA07EEDE24C92CC20074BDBD /* Investor+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA07EED624C92CC20074BDBD /* Investor+CoreDataClass.swift */; };
+		DA07EEDF24C92CC20074BDBD /* Investor+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA07EED724C92CC20074BDBD /* Investor+CoreDataProperties.swift */; };
+		DA07EEE024C92CC20074BDBD /* InvestorGroupChange+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA07EED824C92CC20074BDBD /* InvestorGroupChange+CoreDataClass.swift */; };
+		DA07EEE124C92CC20074BDBD /* InvestorGroupChange+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA07EED924C92CC20074BDBD /* InvestorGroupChange+CoreDataProperties.swift */; };
+		DA261B3B24871F9000C6AA67 /* EditInvestorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA261B3A24871F9000C6AA67 /* EditInvestorView.swift */; };
 		DA35588024367DFD00F4E853 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA35587F24367DFD00F4E853 /* AppDelegate.swift */; };
 		DA35588224367DFD00F4E853 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA35588124367DFD00F4E853 /* SceneDelegate.swift */; };
 		DA35588524367DFD00F4E853 /* SwiftInvestmentManagerApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DA35588324367DFD00F4E853 /* SwiftInvestmentManagerApp.xcdatamodeld */; };
@@ -19,14 +30,6 @@
 		DA3F1A622437DA11004E55DB /* AppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3F1A612437DA11004E55DB /* AppView.swift */; };
 		DA3F1A6424394778004E55DB /* AddInvestorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3F1A6324394778004E55DB /* AddInvestorView.swift */; };
 		DA9D7C842436F0F90001ECBD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA9D7C832436F0F90001ECBD /* LaunchScreen.storyboard */; };
-		DACCB26A24983851001E5523 /* Investor+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DACCB26224983851001E5523 /* Investor+CoreDataClass.swift */; };
-		DACCB26B24983851001E5523 /* Investor+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DACCB26324983851001E5523 /* Investor+CoreDataProperties.swift */; };
-		DACCB26C24983851001E5523 /* InvestorChange+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DACCB26424983851001E5523 /* InvestorChange+CoreDataClass.swift */; };
-		DACCB26D24983851001E5523 /* InvestorChange+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DACCB26524983851001E5523 /* InvestorChange+CoreDataProperties.swift */; };
-		DACCB26E24983851001E5523 /* InvestorGroup+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DACCB26624983851001E5523 /* InvestorGroup+CoreDataClass.swift */; };
-		DACCB26F24983851001E5523 /* InvestorGroup+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DACCB26724983851001E5523 /* InvestorGroup+CoreDataProperties.swift */; };
-		DACCB27024983851001E5523 /* InvestorGroupChange+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DACCB26824983851001E5523 /* InvestorGroupChange+CoreDataClass.swift */; };
-		DACCB27124983851001E5523 /* InvestorGroupChange+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DACCB26924983851001E5523 /* InvestorGroupChange+CoreDataProperties.swift */; };
 		DAF8BADF243B167A001183EF /* InvestorListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF8BADE243B167A001183EF /* InvestorListView.swift */; };
 /* End PBXBuildFile section */
 
@@ -48,7 +51,18 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		DA261B3A24871F9000C6AA67 /* ConfirmationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmationView.swift; sourceTree = "<group>"; };
+		DA07EEB824C912B80074BDBD /* TotalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalView.swift; sourceTree = "<group>"; };
+		DA07EEBA24C91C180074BDBD /* InvestorHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvestorHistory.swift; sourceTree = "<group>"; };
+		DA07EEBC24C91C750074BDBD /* InvestorChangeList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvestorChangeList.swift; sourceTree = "<group>"; };
+		DA07EED224C92CC20074BDBD /* InvestorChange+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "InvestorChange+CoreDataClass.swift"; sourceTree = "<group>"; };
+		DA07EED324C92CC20074BDBD /* InvestorChange+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "InvestorChange+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		DA07EED424C92CC20074BDBD /* InvestorGroup+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "InvestorGroup+CoreDataClass.swift"; sourceTree = "<group>"; };
+		DA07EED524C92CC20074BDBD /* InvestorGroup+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "InvestorGroup+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		DA07EED624C92CC20074BDBD /* Investor+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Investor+CoreDataClass.swift"; sourceTree = "<group>"; };
+		DA07EED724C92CC20074BDBD /* Investor+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Investor+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		DA07EED824C92CC20074BDBD /* InvestorGroupChange+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "InvestorGroupChange+CoreDataClass.swift"; sourceTree = "<group>"; };
+		DA07EED924C92CC20074BDBD /* InvestorGroupChange+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "InvestorGroupChange+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		DA261B3A24871F9000C6AA67 /* EditInvestorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditInvestorView.swift; sourceTree = "<group>"; };
 		DA35587C24367DFD00F4E853 /* SwiftInvestmentManagerApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftInvestmentManagerApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA35587F24367DFD00F4E853 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DA35588124367DFD00F4E853 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -66,14 +80,6 @@
 		DA3F1A612437DA11004E55DB /* AppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppView.swift; sourceTree = "<group>"; };
 		DA3F1A6324394778004E55DB /* AddInvestorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddInvestorView.swift; sourceTree = "<group>"; };
 		DA9D7C832436F0F90001ECBD /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
-		DACCB26224983851001E5523 /* Investor+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Investor+CoreDataClass.swift"; sourceTree = "<group>"; };
-		DACCB26324983851001E5523 /* Investor+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Investor+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		DACCB26424983851001E5523 /* InvestorChange+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "InvestorChange+CoreDataClass.swift"; sourceTree = "<group>"; };
-		DACCB26524983851001E5523 /* InvestorChange+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "InvestorChange+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		DACCB26624983851001E5523 /* InvestorGroup+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "InvestorGroup+CoreDataClass.swift"; sourceTree = "<group>"; };
-		DACCB26724983851001E5523 /* InvestorGroup+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "InvestorGroup+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		DACCB26824983851001E5523 /* InvestorGroupChange+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "InvestorGroupChange+CoreDataClass.swift"; sourceTree = "<group>"; };
-		DACCB26924983851001E5523 /* InvestorGroupChange+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "InvestorGroupChange+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		DAF8BADE243B167A001183EF /* InvestorListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvestorListView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -105,14 +111,14 @@
 		DA0DF8142436BF4B0096BAC8 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				DACCB26224983851001E5523 /* Investor+CoreDataClass.swift */,
-				DACCB26324983851001E5523 /* Investor+CoreDataProperties.swift */,
-				DACCB26424983851001E5523 /* InvestorChange+CoreDataClass.swift */,
-				DACCB26524983851001E5523 /* InvestorChange+CoreDataProperties.swift */,
-				DACCB26624983851001E5523 /* InvestorGroup+CoreDataClass.swift */,
-				DACCB26724983851001E5523 /* InvestorGroup+CoreDataProperties.swift */,
-				DACCB26824983851001E5523 /* InvestorGroupChange+CoreDataClass.swift */,
-				DACCB26924983851001E5523 /* InvestorGroupChange+CoreDataProperties.swift */,
+				DA07EED224C92CC20074BDBD /* InvestorChange+CoreDataClass.swift */,
+				DA07EED324C92CC20074BDBD /* InvestorChange+CoreDataProperties.swift */,
+				DA07EED424C92CC20074BDBD /* InvestorGroup+CoreDataClass.swift */,
+				DA07EED524C92CC20074BDBD /* InvestorGroup+CoreDataProperties.swift */,
+				DA07EED624C92CC20074BDBD /* Investor+CoreDataClass.swift */,
+				DA07EED724C92CC20074BDBD /* Investor+CoreDataProperties.swift */,
+				DA07EED824C92CC20074BDBD /* InvestorGroupChange+CoreDataClass.swift */,
+				DA07EED924C92CC20074BDBD /* InvestorGroupChange+CoreDataProperties.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -143,10 +149,13 @@
 				DA35587F24367DFD00F4E853 /* AppDelegate.swift */,
 				DA35588124367DFD00F4E853 /* SceneDelegate.swift */,
 				DA35588624367DFD00F4E853 /* InvestorsView.swift */,
+				DA07EEBA24C91C180074BDBD /* InvestorHistory.swift */,
+				DA07EEBC24C91C750074BDBD /* InvestorChangeList.swift */,
 				DAF8BADE243B167A001183EF /* InvestorListView.swift */,
 				DA3F1A6324394778004E55DB /* AddInvestorView.swift */,
-				DA261B3A24871F9000C6AA67 /* ConfirmationView.swift */,
+				DA261B3A24871F9000C6AA67 /* EditInvestorView.swift */,
 				DA3F1A612437DA11004E55DB /* AppView.swift */,
+				DA07EEB824C912B80074BDBD /* TotalView.swift */,
 				DA0DF8142436BF4B0096BAC8 /* Classes */,
 				DA35588824367E0000F4E853 /* Assets.xcassets */,
 				DA9D7C832436F0F90001ECBD /* LaunchScreen.storyboard */,
@@ -315,21 +324,24 @@
 			buildActionMask = 2147483647;
 			files = (
 				DA35588524367DFD00F4E853 /* SwiftInvestmentManagerApp.xcdatamodeld in Sources */,
-				DACCB27024983851001E5523 /* InvestorGroupChange+CoreDataClass.swift in Sources */,
-				DACCB26D24983851001E5523 /* InvestorChange+CoreDataProperties.swift in Sources */,
+				DA07EEDC24C92CC20074BDBD /* InvestorGroup+CoreDataClass.swift in Sources */,
 				DAF8BADF243B167A001183EF /* InvestorListView.swift in Sources */,
-				DA261B3B24871F9000C6AA67 /* ConfirmationView.swift in Sources */,
+				DA07EEBB24C91C180074BDBD /* InvestorHistory.swift in Sources */,
+				DA261B3B24871F9000C6AA67 /* EditInvestorView.swift in Sources */,
+				DA07EEDF24C92CC20074BDBD /* Investor+CoreDataProperties.swift in Sources */,
+				DA07EEDE24C92CC20074BDBD /* Investor+CoreDataClass.swift in Sources */,
+				DA07EEE024C92CC20074BDBD /* InvestorGroupChange+CoreDataClass.swift in Sources */,
 				DA35588024367DFD00F4E853 /* AppDelegate.swift in Sources */,
-				DACCB26F24983851001E5523 /* InvestorGroup+CoreDataProperties.swift in Sources */,
-				DACCB26E24983851001E5523 /* InvestorGroup+CoreDataClass.swift in Sources */,
+				DA07EEBD24C91C750074BDBD /* InvestorChangeList.swift in Sources */,
+				DA07EEB924C912B80074BDBD /* TotalView.swift in Sources */,
+				DA07EEE124C92CC20074BDBD /* InvestorGroupChange+CoreDataProperties.swift in Sources */,
 				DA3F1A6424394778004E55DB /* AddInvestorView.swift in Sources */,
-				DACCB26B24983851001E5523 /* Investor+CoreDataProperties.swift in Sources */,
 				DA35588724367DFD00F4E853 /* InvestorsView.swift in Sources */,
+				DA07EEDA24C92CC20074BDBD /* InvestorChange+CoreDataClass.swift in Sources */,
+				DA07EEDB24C92CC20074BDBD /* InvestorChange+CoreDataProperties.swift in Sources */,
 				DA3F1A622437DA11004E55DB /* AppView.swift in Sources */,
-				DACCB26C24983851001E5523 /* InvestorChange+CoreDataClass.swift in Sources */,
-				DACCB26A24983851001E5523 /* Investor+CoreDataClass.swift in Sources */,
 				DA35588224367DFD00F4E853 /* SceneDelegate.swift in Sources */,
-				DACCB27124983851001E5523 /* InvestorGroupChange+CoreDataProperties.swift in Sources */,
+				DA07EEDD24C92CC20074BDBD /* InvestorGroup+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
